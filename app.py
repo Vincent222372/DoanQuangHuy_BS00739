@@ -1,7 +1,7 @@
 # app.py
 
-from google.colab import files
-uploaded = files.upload()
+#from google.colab import files
+#uploaded = files.upload()
 
 # Step 1: Data Collection – ABC Manufacturing (Retail Sales Data Integration)
 import pandas as pd

@@ -11,12 +11,13 @@ Original file is located at
 #uploaded = files.upload()
 
 # Step 1: Data Collection – ABC Manufacturing (Retail Sales Data Integration)
+import streamlit as st
 import pandas as pd
 df = pd.read_csv('Retail_sales.csv')
 
 # Display first 5 rows of the dataset
 print("📌 First 5 rows of the dataset:")
-display(df.head())
+st.dataframe(df.head())
 
 # Basic structure of the dataset
 print("\n📌 Dataset Information:")
@@ -28,7 +29,7 @@ print(df.isnull().sum())
 
 # Basic statistical summary
 print("\n📌 Descriptive Statistics:")
-display(df.describe())
+st.dataframe(df.describe())
 
 # Show the number of unique values per column
 print("\n📌 Unique Values in Each Column:")

@@ -7,8 +7,8 @@ Original file is located at
     https://colab.research.google.com/drive/1DAvxownh5ZSauMM1EZnK_bZC2b7E8kC6
 """
 
-from google.colab import files
-uploaded = files.upload()
+#from google.colab import files
+#uploaded = files.upload()
 
 # Step 1: Data Collection – ABC Manufacturing (Retail Sales Data Integration)
 import pandas as pd

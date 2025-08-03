@@ -1,5 +1,5 @@
 # app.py
-
+import os
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -10,23 +10,30 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import OneHotEncoder
 
+
 def main():
     st.title("ABC Manufacturing – Retail Sales Analysis & Forecasting")
 
-    uploaded_file = st.file_uploader("Upload your Retail_sales.csv file", type=['csv'])
+    if os.path.exists("Retail_sales.csv"):
+        df = pd.read_csv("Retail_sales.csv")
+        st.success("Loaded data from local file: Retail_sales.csv")
+    else:
+        uploaded_file = st.file_uploader("Upload your Retail_sales.csv file", type=['csv'])
+        if uploaded_file is not None:
+            df = pd.read_csv(uploaded_file)
+            st.success("Loaded data from uploaded file.")
+        else:
+            st.warning("Please upload a Retail_sales.csv file to proceed.")
+            return
 
-    if uploaded_file:
-        df = pd.read_csv(uploaded_file)
-        show_overview(df)
-
-        df = preprocess_data(df)
-        column_chart(df)
-        line_chart(df)
-        pie_chart(df)
-        heatmap(df)
-        box_plot(df)
-        regression_model(df)
-
+    show_overview(df)
+    df = preprocess_data(df)
+    column_chart(df)
+    line_chart(df)
+    pie_chart(df)
+    heatmap(df)
+    box_plot(df)
+    regression_model(df)
 
 
 def show_overview(df):
@@ -48,6 +55,7 @@ def preprocess_data(df):
     df['Date'] = pd.to_datetime(df['Date'])
     df['Month'] = df['Date'].dt.month_name()
     return df
+
 
 def column_chart(df):
     st.subheader("📊 Total Sales Revenue by Product Category")
@@ -140,7 +148,6 @@ def regression_model(df):
 
     st.write("Top Influential Features:")
     st.dataframe(coef_df.head(10))
-
 
 
 if __name__ == '__main__':
